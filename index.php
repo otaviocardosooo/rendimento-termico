@@ -1,49 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/style.csss">
+</head>
+<body>
+       
 <?php
-include_once './includes/_head.php'
+if (isset ( $_POST['Q1']) ) {
+    $Q1 = $_POST['Q1'];
+    $Q2 = $_POST['Q2'];
+    $T = $_POST['T'];
+    if ($Q1 != "" && $Q2 != "" ) {        
+        $nq = 1-($Q2/$Q1);
+        echo "O  rendimento dessa máquina será de: ".$nq; 
+    } elseif ($T != "" && $Q1 != "" ) {
+       $nt = ($T/$Q1);
+       echo "O  rendimento dessa máquina será de: ".$nt; 
+    } elseif ($T == "" && $Q1 != ""&& $Q2 != ""  ) {
+        $nq12 = ($Q1-$Q2)/$Q1;
+        echo "O  rendimento dessa máquina será de: ".$nQ12; 
+     };
+}
 ?>
 
-<main>
-    <div class="container">
-        <h1 class="title">Variação da Entalpia</h1>
-        <div class="containerInput">
-            <form class="inputVP" action="./index.php" method="post">
-                <input 
-                type="text"
-                placeholder="Digite a entalpia dos produtos..."
-                name="vP"
-                id="vP"
-                />
-            </form>
-            <form class="inputVR"  action="./index.php" method="post">
-                <input
-                type="text"
-                placeholder="Digite a entalpia dos reagentes..."
-                name="vR"
-                id="vR"
-                />
-            </form>
-            <button class="buttonSearch" type="submit" value="cadastrar">
-                Buscar
-            </button>    
-        </div>
-        <?php
-            // Declaração das variáveis
-            if (isset($_POST['vP'])) {
-                $resultVP = $_POST['vP'];
-            }
+<h1>Rendimento de uma máquina térmica</h1>
+<form action="index.php" method="post">
+    <ul>
+        <li>
+            <label for="Q1">Q1</label>
+            <input type="number" name="Q1" id="Q1">
+        </li>
+        <li>
+            <label for="Q2">Q2</label>
+            <input type="number" name="Q2" id="Q2">
+        </li>
+        <li>
+            <label for="T">T</label>
+            <input type="number" name="T" id="T">
+        </li>
+        <input id= "Cadastrar" type="submit" value="Cadastrar">
+    </ul>
+</form>
 
-            if (isset($_POST['vR'])) {
-                $resultVR = $_POST['vR'];
-            }
-            // Efetuação da operação    
-            $result = ($resultVP) - ($resultVR); 
-        ?>
-        <div class="result">
-            <h2>Variação da Entalpia = <?php echo $result?></h2>
-        </div>
-    </div>
-</main>
-
-<?php
-include_once './includes/_footer.php'
-?>
+</body>
+</html>
